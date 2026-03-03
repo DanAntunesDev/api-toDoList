@@ -32,6 +32,12 @@ app.post('/tarefas', (req, res ) => {
   res.status(201).json(novaTarefa);
 });
 
+// Rota para listar todas as tarefas ( READ )
+app.get('/tarefas', (req,res) => {
+  // 1. Simplesmente retorna a lista completa de tarefas
+  res.status(200).json(tarefas);
+})
+
 // Cria uma rota de teste para ver se tudo está funcionando.
 app.get('/', (req, res) => {
   res.send('API To-Do List está no ar e funcionando!');
@@ -41,4 +47,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
+
 
