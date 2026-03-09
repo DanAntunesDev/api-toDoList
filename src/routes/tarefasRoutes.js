@@ -2,10 +2,10 @@
 const { Router } = require('express');
 
 // Cria uma instancia do Router
-const routetr = Router();
+const router = Router();
 
 // Banco de Dados em memoria
-const tarefas = []
+const tarefas = [];
 
 // Rota para criar uma nova tarefa (create)
 router.post('/tarefas', (req,res) => {
@@ -20,11 +20,11 @@ router.post('/tarefas', (req,res) => {
 });
 
 // Rota para listar todas as tarefas (Read)
-router.get('/tarefas', (req,res) => {
+router.get('/tarefas', (req, res) => {
   res.status(200).json(tarefas);
 });
 
-// Rota para nuscar uma tarefa especifica pelo ID ( Read)
+// Rota para Buscar uma tarefa especifica pelo ID ( Read)
 router.get('/tarefas/:id', (req,res) => {
   // pega o ID dos parametros da rota
   const id = parseInt(req.params.id);
@@ -39,6 +39,35 @@ router.get('/tarefas/:id', (req,res) => {
   } else {
     // Se não encontrou, retorna um erro 404
     res.status(404).json({ message: 'Tarefa não encontrada. '});
+  }
+});
+
+// Rota para atualizar uma tarefa (Update)
+router.put('/tarefas/:id', (req, res) => {
+  // Pega o ID dos parametros e os novos dados do corpo
+  const id = parseInt(req.params.id);
+  const { description, done } = req.body;
+
+  // Encontra o INDICE da tarefa no array
+  const indexDaTarefa = tarefas.findIndex(t  => t.id === id);
+
+  // verifica se a tarefa existe (se o indice for -1, não encontrou)
+  if (indexDaTarefa !==1 ){
+    // Atualiza os dados da tarefa encontrada
+    const tarefaAtualizada = {
+      ...tarefas[indexDaTarefa], // pega todos os dados atuais
+      description: description || tarefas[indexDaTarefa].description, // Atualiza a descrição se ela for enviada
+      done: typeof done === 'boolean' ? done : tarefas [indexDaTarefa].done // Atualiza o 'done' se ele for enviado
+    };
+
+    // Substitui a tarefa antiga pela nova array
+    tarefas[indexDaTarefa] = tarefaAtualizada;
+
+    // Retorna a tarefa atualizada
+    res.status(200).json(tarefaAtualizada);
+  } else {
+    // Se não encontrou, retornou um erro 404
+    res.status(404).json({ message: 'Tarefa não encontrada.'});
   }
 });
 
