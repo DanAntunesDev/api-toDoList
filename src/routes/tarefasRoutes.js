@@ -52,7 +52,7 @@ router.put('/tarefas/:id', (req, res) => {
   const indexDaTarefa = tarefas.findIndex(t  => t.id === id);
 
   // verifica se a tarefa existe (se o indice for -1, não encontrou)
-  if (indexDaTarefa !==1 ){
+  if (indexDaTarefa !== -1 ){
     // Atualiza os dados da tarefa encontrada
     const tarefaAtualizada = {
       ...tarefas[indexDaTarefa], // pega todos os dados atuais
@@ -71,5 +71,25 @@ router.put('/tarefas/:id', (req, res) => {
   }
 });
 
+// Rota para deletar uma tarefa (delete)
+router.delete('/tarefas/:id', (req,res) => {
+  // Pega o ID dos parametros da rota
+  const id = parseInt(req.params.id);
+
+  // Encontra o INDICE da tarefa que queremos deletar
+  const indexDaTarefa = tarefas.findIndex(t => t.id === id);
+
+  // Verifica se a tarefa existe
+  if (indexDaTarefa !== -1) {
+    // Remove a tarefa do array usando o seu indice
+    tarefas.splice(indexDaTarefa, 1);
+
+    // Retorna uma resposta de sucesso, sem conteudo
+    res.status(204).send();
+  } else {
+    // Se não encontrou, retorna o erro 404
+    res.status(404).json({ message: 'Tarefa não encontrada.'});
+  }
+});
 // Exporta o router para ser usado no arquivo principal 
 module.exports = router; 
