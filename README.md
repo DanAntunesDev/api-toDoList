@@ -1,33 +1,113 @@
-# API To-Do List
+# Node To-Do API
 
-Este é o segundo projeto do currículo de 10 projetos para desenvolvimento de portfólio, com foco em Node.js e Express.js.
+API REST para gerenciamento de tarefas desenvolvida com **Node.js** e **Express**.
 
-## Objetivo
+Este projeto foi criado com foco em prática de desenvolvimento backend, implementação de operações CRUD e organização inicial de uma aplicação web baseada em rotas HTTP.
 
-O objetivo deste projeto é construir uma API RESTful completa para um sistema de lista de tarefas (To-Do List), implementando todas as operações de um **CRUD** (Create, Read, Update, Delete).
+---
 
-## Funcionalidades
+# Objetivo do projeto
 
-- [ ] **`POST /tarefas`**: Criar uma nova tarefa.
-- [ ] **`GET /tarefas`**: Listar todas as tarefas.
-- [ ] **`GET /tarefas/:id`**: Obter uma tarefa específica pelo seu ID.
-- [ ] **`PUT /tarefas/:id`**: Atualizar uma tarefa existente.
-- [ ] **`DELETE /tarefas/:id`**: Deletar uma tarefa.
+O objetivo da aplicação é fornecer uma API simples e funcional para gerenciamento de tarefas, permitindo criar, listar, buscar, atualizar e remover registros.
 
-## Tecnologias Utilizadas
+Esse tipo de projeto é importante para consolidar conceitos fundamentais de backend, como:
+
+- criação de servidor HTTP
+- definição de rotas
+- tratamento de requisições e respostas
+- manipulação de dados em memória
+- estruturação inicial de uma API REST
+
+---
+
+# Tecnologias utilizadas
 
 - Node.js
-- Express.js
+- Express
+- JavaScript
 - Nodemon
 
-## Como Executar
+---
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/SEU-USUARIO/api-todolist.git
+# Funcionalidades
 
-2. Instale as dependencias:
-  npm install
+A API possui as seguintes operações:
 
-3. Inicie o servidor de Desenvolvimento:
-  npm run dev
+- criar uma nova tarefa
+- listar todas as tarefas
+- buscar uma tarefa por ID
+- atualizar uma tarefa existente
+- remover uma tarefa
+
+---
+
+# Rotas disponíveis
+
+## Criar tarefa
+
+`POST /tarefas`
+
+Exemplo de body:
+
+```json
+{
+  "description": "Estudar Node.js"
+}
+
+```
+
+Listar tarefas
+
+GET /tarefas
+
+Buscar tarefa por ID
+
+GET /tarefas/:id
+
+Atualizar tarefa
+
+PUT /tarefas/:id
+
+Exemplo de body:
+
+{
+  "description": "Estudar Express",
+  "done": true
+}
+
+Remover tarefa
+
+DELETE /tarefas/:id
+
+Estrutura do projeto
+
+A aplicação está organizada da seguinte forma:
+
+src/
+  index.js
+  routes/
+    tarefasRoutes.js
+
+Essa estrutura separa o ponto de entrada da aplicação das rotas responsáveis pela lógica do CRUD.
+
+Como executar o projeto
+
+Clone o repositório:
+
+git clone https://github.com/DanAntunesDev/node-todo-api.git
+
+Acesse a pasta do projeto:
+
+cd node-todo-api
+
+Instale as dependências:
+
+npm install
+
+Inicie o servidor em desenvolvimento:
+
+npm run dev
+
+O servidor será iniciado em:
+
+http://localhost:3000
